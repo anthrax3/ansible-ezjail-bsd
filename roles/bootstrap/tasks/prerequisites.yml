@@ -1,10 +1,13 @@
-- name: Update facts
-  setup:
-
 - name: update portsnap
   command: /usr/sbin/portsnap fetch extract
   tags:
    - ports
+
+- name: Install Python - FreeBSD does not ship python in standard package distribution
+  command: pkg install python
+
+- name: Update facts
+  setup:
 
 - name: Unset X11
   command: echo OPTIONS_UNSET=X11 >> /etc/make.conf
