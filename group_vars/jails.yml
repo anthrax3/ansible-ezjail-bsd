@@ -2,7 +2,9 @@
 #My var just to be sure ansible is calling this file
 ronald: 1970233
 
-masterserver_ip: 10.10.10.10
+#Jails Configurations
+#This file needs to be edited for each new setup otherwise these default variables are going to be used
+masterserver_ip: 192.168.0.1
 masterserver_interface: em0
 masterserver_jail_name: "masterserver"
 jails_ip_block: 192.168.0.0/24

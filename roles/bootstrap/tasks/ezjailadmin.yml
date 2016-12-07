@@ -4,7 +4,7 @@
   tags: ezjailadmin
 
 - name: Create the master FreeBSD Jail that will contain all the pre-downloaded files and servers
-  command: ezjail-admin create masterserver ‘{{ masterserver_interface }}|{{ masterserver_ip }},lo1|127.0.1.1’
+  command: ezjail-admin create {{ masterserver_jail_name }} ‘{{ masterserver_interface }}|{{ masterserver_ip }},lo1|127.0.1.1’
   tags: ezjailadmin
 
 - name: Start the new Jail

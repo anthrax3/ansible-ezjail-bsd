@@ -1,0 +1,7 @@
+WRKDIRPREFIX=           /var/ports
+DISTDIR=                /var/ports/distfiles
+PACKAGES=               /var/ports/packages
+INDEXDIR=               /var/ports
+MASTER_SITE_BACKUP?= ftp://{{ masterserver_ip }}/${DIST_SUBDIR}/
+MASTER_SITE_OVERRIDE?= ${MASTER_SITE_BACKUP}
+PACKAGESITE=ftp://{{ masterserver_ip }}/

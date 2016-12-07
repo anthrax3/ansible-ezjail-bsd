@@ -1,0 +1,25 @@
+. /etc/rc.subr
+name=ezjail.flavour.example
+start_cmd=flavour_setup
+flavour_setup() {
+  rm -f "/etc/rc.d/ezjail.flavour"
+
+#This is where to add groups. Default group is "afnog"
+pw groupadd -q -n afnog # -g 1004
+
+#This is where to add users. Default username is "afnog" and password "admin"
+echo -n '$1$p75bbfK.$Kz3dwkoVlgZrfLZdAXQt91' |\
+pw useradd -n afnog -u 1005 -p 04-oct-2016 -s /bin/csh -m -d /home/afnog -G afnog,wheel -c 'Afnog User' -H 0
+
+#This is where to specify what should be installed by default in the jails. At a bare minimum, you need python and bind910. The remaining lines should remain commented as they are part of the exercises in the course. However, if you want them to move faster in some sections of the course, you can uncomment the lines and they will be able to still run the commands to install the softwares on their servers but they will receive a message that the softwares have been already installed.
+
+env ASSUME_ALWAYS_YES=YES pkg bootstrap
+pkg install -y python27
+#pkg install -y vim
+#pkg install -y perl5
+pkg install -y bind910
+#pkg install -y bash
+#pkg install -y sudo
+}
+run_rc_command "$1"
+

@@ -5,20 +5,16 @@
    - jexec {{ masterserver_jail_name }} portinstall --batch sudo bash zsh unbound textmaze
   tags: jexec
 
-#in this operation we create the file on the host server and then transfer it to the
-#jail in the next task
+#in this operation we create the file on the host server and then transfer it to the jail
 - name: Enable local DNS server for use by all trainees
   template:
     src: usr/local/etc/unbound/unbound.conf.j2
-    dest: /tmp/unbound.conf
+    dest: /usr/jails/{{ masterserver_jail_name }}/usr/local/etc/unbound/unbound.conf
     owner: root
     mode: 0644
   tags:
    - jexec
    - unbound
-
-- name: Transfer the file to the jail
-  command: jexec xxxxx transfer blah blah
 
 - name: Add unbound to start at FreeBSD boot
   command: jexec {{ masterserver_jail_name }} sysrc unbound_enable=YES

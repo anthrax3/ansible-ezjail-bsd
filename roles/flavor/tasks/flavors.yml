@@ -1,0 +1,25 @@
+- name: Copy Jails flavours example to afnog
+  copy:
+    src: /usr/jails/flavours/example
+    dest: /usr/jails/flavours/afnog
+  tags: flavor
+
+- name: ezjail flavor script
+  template:
+    src: usr/jails/flavours/afnog/etc/rc.d/ezjail.flavour.j2
+    dest: /usr/jails/flavours/afnog/etc/rc.d/ezjail.flavour
+    mode: 0755
+  tags: flavor
+
+- name: Copy python to the jails
+  copy:
+    src: /usr/jails/masterserver/var/cache/pkg/*python*
+    dest: /usr/jails/flavours/afnog/pkg
+  tags: flavor
+
+- name: Copy bind to the jails
+  copy:
+    src: /usr/jails/masterserver/var/cache/pkg/*bind*
+    dest: /usr/jails/flavours/afnog/pkg
+  tags: flavor
+
