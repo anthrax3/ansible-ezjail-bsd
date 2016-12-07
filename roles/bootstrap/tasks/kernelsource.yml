@@ -8,6 +8,7 @@
   command: tar xvzf src.txz
   args:
     chdir: /
+  tags: kernel
 
 - name: Make buildworld - this will take some time
   command: "{{ item }}"
@@ -16,3 +17,4 @@
    - make buildworld && ezjail-admin update -i -p
   args:
     chdir: /usr/src
+  tags: kernel

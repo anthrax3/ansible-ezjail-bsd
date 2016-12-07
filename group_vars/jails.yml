@@ -4,3 +4,5 @@ ronald: 1970233
 
 masterserver_ip: 10.10.10.10
 masterserver_interface: em0
+masterserver_jail_name: "masterserver"
+jails_ip_block: 192.168.0.0/24

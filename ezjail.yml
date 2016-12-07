@@ -1,6 +1,6 @@
 ---
 - hosts: jails
-  become_user: vagrant
+  become_user: root
   become: true
   roles:
     - bootstrap
