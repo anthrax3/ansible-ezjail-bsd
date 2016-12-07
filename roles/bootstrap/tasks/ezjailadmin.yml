@@ -1,0 +1,12 @@
+# We use sed to find the correct line and insert immediately below it
+- name: Edit the ezjail-admin command to enable creation of jails that will allow the jail to connect to the Internet
+  command: sed '/_retention_policy=/a echo export jail_${ezjail_safename}_parameters=\\"allow.raw_sockets=1 allow.sysvipc=1\\"' /usr/local/bin/ezjail-admin
+  tags: ezjailadmin
+
+- name: Create the master FreeBSD Jail that will contain all the pre-downloaded files and servers
+  command: ezjail-admin create masterserver ‘{{ masterserver_interface }}|{{ masterserver_ip }},lo1|127.0.1.1’
+  tags: ezjailadmin
+
+- name: Start the new Jail
+  command: ezjail-admin start masterserver
+  tags: ezjailadmin

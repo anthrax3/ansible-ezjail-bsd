@@ -1,0 +1,18 @@
+- name: Download BSD /usr/src/ source code
+  get_url:
+    url: ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.3-RELEASE/src.txz
+    dest: /
+  tags: kernel
+
+- name: Extract downloaded source
+  command: tar xvzf src.txz
+  args:
+    chdir: /
+
+- name: Make buildworld - this will take some time
+  command: "{{ item }}"
+  with_items:
+   - rm -rf /usr/obj
+   - make buildworld && ezjail-admin update -i -p
+  args:
+    chdir: /usr/src

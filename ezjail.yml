@@ -1,0 +1,16 @@
+---
+- hosts: jails
+  become_user: vagrant
+  become: true
+  roles:
+    - bootstrap
+    - jailmaster 
+    - flavor
+  pre_tasks:
+    - name: debug some variables
+      debug:
+        var: "{{ item }}"
+      with_items:
+        - ronald
+        - masterserver_ip
+        - masterserver_interface

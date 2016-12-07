@@ -1,0 +1,46 @@
+- name: Update facts
+  setup:
+
+- name: update portsnap
+  command: /usr/sbin/portsnap fetch extract
+  tags:
+   - ports
+
+- name: Unset X11
+  command: echo OPTIONS_UNSET=X11 >> /etc/make.conf
+
+- name: Enable ezjail
+  command: echo ezjail_enable=YES >> /etc/rc.conf
+
+- name: Gateway enable
+  command: echo gateway_enable=YES >> /etc/rc.conf
+
+- name: Enable Sysctl options
+  command: "{{ item }}"
+  with_items:
+   - echo security.jail.sysvipc_allowed=1 >> /etc/sysctl.conf
+   - echo security.jail.allow_raw_sockets=1 >> /etc/sysctl.conf
+   - sysctl security.jail.sysvipc_allowed=1 
+   - sysctl security.jail.allow_raw_sockets=1
+
+- name: Install Port Upgrade
+  command: make –DBATCH install clean
+  args:
+    chdir: /usr/ports/ports-mgmt/portupgrade
+  tags:
+   - ports
+
+- name: Install Sudo, Screen, EzJAIL and Bash
+  command: portinstall --batch sudo screen bash ezjail
+  tags:
+   - ports
+
+- name: Start Ezjail service
+  command: service ezjail start
+
+- name: Enable BSD Cloned Interface
+  command: "{{ item }}"
+  with_items:
+   - echo cloned_interfaces=lo1 >> /etc/rc.conf
+   - service netif cloneup
+   - ezjail-admin install -p

@@ -1,0 +1,6 @@
+---
+#My var just to be sure ansible is calling this file
+ronald: 1970233
+
+masterserver_ip: 10.10.10.10
+masterserver_interface: em0
