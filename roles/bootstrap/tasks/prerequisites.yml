@@ -3,9 +3,6 @@
   tags:
    - ports
 
-- name: Install Python - FreeBSD does not ship python in standard package distribution
-  command: pkg install python
-
 - name: Update facts
   setup:
 
@@ -34,7 +31,9 @@
    - ports
 
 - name: Install Sudo, Screen, EzJAIL and Bash
-  command: portinstall --batch sudo screen bash ezjail
+  portinstall:
+    name: sudo,screen,bash,ezjail
+    state: present
   tags:
    - ports
 
