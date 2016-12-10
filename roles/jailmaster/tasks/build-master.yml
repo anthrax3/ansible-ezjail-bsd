@@ -1,5 +1,5 @@
 - name: Build the master server
-  command: "{{ item }}"
+  shell: "{{ item }}"
   with_items:
    - jexec {{ masterserver_jail_name }} pkg install perl5 python27 vim screen shellinabox portupgrade vsftpd-ext bind910
    - jexec {{ masterserver_jail_name }} portinstall --batch sudo bash zsh unbound textmaze
@@ -17,7 +17,7 @@
    - unbound
 
 - name: Add unbound to start at FreeBSD boot
-  command: jexec {{ masterserver_jail_name }} sysrc unbound_enable=YES
+  shell: jexec {{ masterserver_jail_name }} sysrc unbound_enable=YES
   tags:
    - jexec
    - unbound

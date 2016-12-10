@@ -5,13 +5,13 @@
   tags: kernel
 
 - name: Extract downloaded source
-  command: tar xvzf src.txz
+  shell: tar xvzf src.txz
   args:
     chdir: /
   tags: kernel
 
 - name: Make buildworld - this will take some time
-  command: "{{ item }}"
+  shell: "{{ item }}"
   with_items:
    - rm -rf /usr/obj
    - make buildworld && ezjail-admin update -i -p
