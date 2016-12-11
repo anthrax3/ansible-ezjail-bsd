@@ -3,6 +3,8 @@
   with_items:
    - jexec {{ masterserver_jail_name }} pkg install perl5 python27 vim screen shellinabox portupgrade vsftpd-ext bind910
    - jexec {{ masterserver_jail_name }} portinstall --batch sudo bash zsh unbound textmaze
+  environment:
+    ASSUME_ALWAYS_YES: "yes"
   tags: jexec
 
 #in this operation we create the file on the host server and then transfer it to the jail
