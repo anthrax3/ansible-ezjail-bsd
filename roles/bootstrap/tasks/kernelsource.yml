@@ -2,19 +2,24 @@
   get_url:
     url: ftp://ftp.freebsd.org/pub/FreeBSD/releases/amd64/10.3-RELEASE/src.txz
     dest: /
+    backup: yes
   tags: kernel
 
+#Unarchive doesn't work!
 - name: Extract downloaded source
-  shell: tar xvzf src.txz
+  command: tar xvzf src.txz
   args:
     chdir: /
   tags: kernel
 
+- name: Remove /usr/obj
+  file:
+    path: /usr/obj
+    state: absent
+  tags: kernel
+
 - name: Make buildworld - this will take some time
-  shell: "{{ item }}"
-  with_items:
-   - rm -rf /usr/obj
-   - make buildworld && ezjail-admin update -i -p
+  shell: make buildworld && ezjail-admin update -i -p
   args:
     chdir: /usr/src
   tags: kernel
