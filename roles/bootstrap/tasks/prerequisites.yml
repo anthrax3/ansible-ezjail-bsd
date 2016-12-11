@@ -14,7 +14,7 @@
    - portsnap
 
 - name: Unset X11
-  shell: grep -q 'OPTIONS_UNSET=X11' /etc/rc.conf && echo "yes" || echo OPTIONS_UNSET=X11 >> /etc/make.conf
+  shell: grep -q 'OPTIONS_UNSET=X11' /etc/make.conf && echo "yes" || echo OPTIONS_UNSET=X11 >> /etc/make.conf
   tags: appends
 
 - name: Enable ezjail
