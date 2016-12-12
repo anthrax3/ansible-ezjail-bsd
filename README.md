@@ -1,11 +1,10 @@
 # 1. Install Ansible
   install from packages, grab the latest copy from github or on a python virtualenv
+  Ansible version should be >=2.2.0.0
 
 # 2. Configure SSH passwordless login to an account on the remote server.
-# 3. Install Python. It is required by Ansible
-  ansible -i inventories/jails.yml -K --become --become-method=su -m raw -a 'pkg install python' jails
 
-# 4. Run the ezjails playbook as follows
+# 3. Run the ezjails playbook as follows
   ansible-playbook ezjail.yml -i inventories/jails.yml -K
 
   You will be prompted to enter the 'su' password
