@@ -1,0 +1,19 @@
+- name: PF enable on System boot
+  shell: grep -q 'pf_enable="YES"' /etc/rc.conf && echo "yes" || echo pf_enable="YES" >> /etc/rc.conf
+  tags: firewall
+
+- name: Create PF firewall configuration
+  template:
+    src: etc/pf.conf.j2
+    dest: /etc/pf.conf
+    mode: 0755
+  tags: firewall
+
+- name: Enable PF
+  shell: "{{ item }}"
+  with_items:
+   - kldload pf
+   - pfctl -e
+   - pfctl -f /etc/pf.conf
+  tags: firewall
+

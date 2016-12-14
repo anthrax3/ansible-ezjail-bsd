@@ -10,6 +10,7 @@
     ASSUME_ALWAYS_YES: "yes"
   roles:
     - bootstrap
+    - firewall
     - jailmaster 
     - flavor
   pre_tasks:
