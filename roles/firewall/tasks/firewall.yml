@@ -1,5 +1,5 @@
 - name: PF enable on System boot
-  shell: grep -q 'pf_enable="YES"' /etc/rc.conf && echo "yes" || echo pf_enable="YES" >> /etc/rc.conf
+  shell: grep -q 'pf_enable="YES"' /etc/rc.conf && echo "yes" || echo 'pf_enable="YES"' >> /etc/rc.conf
   tags: firewall
 
 - name: Create PF firewall configuration
