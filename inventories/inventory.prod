@@ -1,0 +1,7 @@
+# If you want to add more roles than one, be careful to not add conflicting roles
+
+[local-machines]
+localhost
+
+[jails]
+training ansible_host=10.10.10.10 ansible_user=afnog

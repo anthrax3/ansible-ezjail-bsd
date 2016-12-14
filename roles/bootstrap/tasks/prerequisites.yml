@@ -6,6 +6,8 @@
 
 - name: Update facts
   setup:
+  tags:
+   - setup
 
 - name: update portsnap
   command: /usr/sbin/portsnap --interactive fetch extract

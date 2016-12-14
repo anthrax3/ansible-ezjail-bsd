@@ -5,7 +5,7 @@
 # 2. Configure SSH passwordless login to an account on the remote server.
 
 # 3. Run the ezjails playbook as follows
-  ansible-playbook ezjail.yml -i inventories/jails.yml -K
+  ansible-playbook ezjail.yml -i inventories/inventory.prod -K
 
   You will be prompted to enter the 'su' password
 
