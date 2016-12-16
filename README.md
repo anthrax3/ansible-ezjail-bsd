@@ -10,3 +10,8 @@
   You will be prompted to enter the 'su' password
 
   NB: Edit the inventories/jails.yml to match your hosts
+
+# 4. Debugging
+Run the ansible-playbook command as follows to run specific parts. Note that the 'setup' tag has to be included since we have set gather_facts to 'no' in the playbook. We gather facts in the playbook later on.
+
+   ansible-playbook ezjail.yml -vvvv -i inventories/inventory.prod --tags="setup,ezjailadmin" -K

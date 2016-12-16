@@ -54,7 +54,10 @@
    - ports
 
 - name: Start Ezjail service
-  command: service ezjail start
+  service:
+    name: ezjail
+    state: restarted
+  tags: ezjail
 
 - name: Enable BSD Cloned Interface
   shell: "{{ item }}"

@@ -6,10 +6,20 @@
     backup: yes
   tags: ezjailadmin
 
+- name: Lets check to see if masterserver config exists so we don't re-create it
+  stat:
+    path: "/usr/local/etc/ezjail/{{ masterserver_jail_name }}"
+  register: stat_result
+  tags: ezjailadmin
+
 - name: Create the master FreeBSD Jail that will contain all the pre-downloaded files and servers
   shell: ezjail-admin create {{ masterserver_jail_name }} '{{ masterserver_interface }}|{{ masterserver_ip }},lo1|127.0.1.1'
+  when: stat_result.stat.exists == False
   tags: ezjailadmin
 
 - name: Start the new Jail
-  command: ezjail-admin start masterserver
+  command: "{{ item }}"
+  with_items:
+   - ezjail-admin stop masterserver
+   - ezjail-admin start masterserver
   tags: ezjailadmin
