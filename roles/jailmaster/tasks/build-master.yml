@@ -1,3 +1,13 @@
+- name: Add resolv.conf to masterserver
+  template:
+    src: usr/jails/masterserver/etc/resolv.conf
+    dest: /usr/jails/masterserver/etc/resolv.conf
+    mode: 0644
+  tags:
+   - jexec
+   - dns
+   - unbound
+
 - name: Build the master server
   shell: "{{ item }}"
   with_items:
@@ -5,7 +15,14 @@
    - jexec {{ masterserver_jail_name }} portinstall --batch sudo bash zsh unbound textmaze
   tags: jexec
 
-#in this operation we create the file on the host server and then transfer it to the jail
+- name: Create unbound config dir
+  file:
+    path: /usr/jails/{{ masterserver_jail_name }}/usr/local/etc/unbound
+    state: directory
+  tags:
+   - jexec
+   - unbound
+
 - name: Enable local DNS server for use by all trainees
   template:
     src: usr/local/etc/unbound/unbound.conf.j2
@@ -27,3 +44,4 @@
   tags:
    - jexec
    - unbound
+
