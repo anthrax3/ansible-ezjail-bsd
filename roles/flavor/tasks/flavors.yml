@@ -1,7 +1,18 @@
-- name: Copy Jails flavours example to afnog
-  copy:
-    src: /usr/jails/flavours/example
-    dest: /usr/jails/flavours/afnog
+#- name: Create afnog dir
+#  file:
+#    path: /usr/jails/flavours/afnog
+#    state: directory
+#    mode: 0755
+#  tags: flavor
+
+#- name: Copy Jails flavours example to afnog
+#  copy:
+#    src: /usr/jails/flavours/example/
+#    dest: /usr/jails/flavours/afnog/
+#  tags: flavor
+
+- name: Copy Jails flavours example to afnog (via shell module)
+  shell: cp -r /usr/jails/flavours/example /usr/jails/flavours/afnog
   tags: flavor
 
 - name: ezjail flavor script
@@ -11,15 +22,29 @@
     mode: 0755
   tags: flavor
 
-- name: Copy python to the jails
-  copy:
-    src: /usr/jails/masterserver/var/cache/pkg/*python*
-    dest: /usr/jails/flavours/afnog/pkg
+- name: create pkg dir in afnog folder
+  file:
+    path: /usr/jails/flavours/afnog/pkg
+    state: directory
+    mode: 0755
   tags: flavor
 
-- name: Copy bind to the jails
-  copy:
-    src: /usr/jails/masterserver/var/cache/pkg/*bind*
-    dest: /usr/jails/flavours/afnog/pkg
+#- name: Copy python to the jails
+#  copy:
+#    src: /usr/jails/masterserver/var/cache/pkg/*python*
+#    dest: /usr/jails/flavours/afnog/pkg
+#  tags: flavor
+
+- name: Copy python to the jails (via shell module)
+  shell: cp -r /usr/jails/masterserver/var/cache/pkg/*python* /usr/jails/flavours/afnog/pkg
   tags: flavor
 
+#- name: Copy bind to the jails
+#  copy:
+#    src: /usr/jails/masterserver/var/cache/pkg/*bind*
+#    dest: /usr/jails/flavours/afnog/pkg
+#  tags: flavor
+
+- name: Copy bind to the jails (via shell module)
+  shell: cp -r /usr/jails/masterserver/var/cache/pkg/*bind* /usr/jails/flavours/afnog/pkg
+  tags: flavor
