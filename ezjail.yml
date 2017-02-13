@@ -13,12 +13,29 @@
     - firewall
     - jailmaster 
     - flavor
+  vars_prompt:
+   - name: "masterserver_ip"
+     prompt: "Enter IP address for the master server"
+     default: "192.168.0.1"
+     private: no
+   - name: "masterserver_interface"
+     prompt: "Enter master server interface"
+     default: "em0"
+     private: no
+   - name: "masterserver_jail_name"
+     prompt: "Enter the master server jail name"
+     default: "masterserver"
+     private: no
+   - name: "jails_ip_block"
+     prompt: "Enter the Jails IP block"
+     default: "192.168.0.0/24"
+     private: no
+
   pre_tasks:
     - name: debug some variables
       debug:
         var: "{{ item }}"
       with_items:
-        - ronald
         - masterserver_ip
         - masterserver_interface
         - jails_ip_block
