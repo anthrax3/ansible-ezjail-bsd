@@ -10,7 +10,7 @@
     ASSUME_ALWAYS_YES: "yes"
   roles:
     - bootstrap
-    - firewall
+#    - firewall
     - jailmaster 
     - flavor
   vars_prompt:
