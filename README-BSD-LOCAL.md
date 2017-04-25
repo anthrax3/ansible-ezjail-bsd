@@ -1,9 +1,9 @@
 # 1. Install Ansible on Free BSD as follows
-# ssh to the remote system where you are setting up jails)
-
+## ssh to the remote system where you are setting up jails
+*The reason for going into the remote system is because this playbook takes long (hours) to run and running ansible the normal way is not recommended*
   ssh username@remote-freebsd-server.com
 
-# and then execute the below
+## and then execute the below
   pkg install lang/python
   pkg install ansible
 
@@ -11,11 +11,9 @@
 
 # 2. Grab a copy of the latest source repository
 
-If you are not a collaborator on the source repo at bitbucket, you can ask for a shared zip file. Collaborators can clone as below:
-  su #Switch to root
+Change user to root and then execute the below
   cd /root
-  git clone https://sureronald@bitbucket.org/sureronald/ansible-ezjail-bsd.git
-
+  git clone https://github.com/sureronald/ansible-ezjail-bsd.git
 If you already have the repository you can run 'git pull' to update to the latest source code
 
 # 3. Run the ezjails playbook as follows
@@ -23,7 +21,7 @@ If you already have the repository you can run 'git pull' to update to the lates
   cd ansible-ezjail-bsd/
   ansible-playbook ezjail.yml -vvvv -i inventories/inventory.prod -c local
 
- Note that we are running the playbook locally and configuring the host
+ Note that we are running the playbook locally so you do not need to update the inventories file
  NB: If you are using your own inventory, ensure it has a [jails] section
 
 # 4. Debugging
